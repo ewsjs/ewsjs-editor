@@ -18,7 +18,7 @@
   "main": "electron.js",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "cross-env PUBLIC_URL=./ react-scripts build",
     "test": "react-scripts test",
     "electron": "electron .",
     "electron-start": "node src/electron-wait-react",
@@ -40,16 +40,17 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^5.2.1",
     "electron": "^6.0.1",
     "electron-builder": "^21.2.0"
   },
   "build": {
     "appId": "com.electron.electron-with-create-react-app",
     "win": {
-        "iconUrl": "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
     },
     "directories": {
-        "buildResources": "public"
+      "buildResources": "public"
     }
   }
 }
