@@ -1,5 +1,9 @@
 import React from 'react';
-import { Stack, StackItem, IStackItemStyles, Dropdown, ChoiceGroup, mergeStyles, IDropdownStyles, TextField, DefaultButton, Text, Label, IStyle, IChoiceGroupOptionStyles, ComboBox } from 'office-ui-fabric-react';
+import {
+  Stack, StackItem, IStackItemStyles, Dropdown, ChoiceGroup, mergeStyles, IDropdownStyles,
+  TextField, DefaultButton, Text, Label, IStyle, IChoiceGroupOptionStyles, ComboBox,
+  Checkbox,
+} from 'office-ui-fabric-react';
 
 const borderStyle: IStackItemStyles = {
   root: {
@@ -35,27 +39,28 @@ const dropdownStyles: Partial<IDropdownStyles> = {
 export default ({ exchangeVersions }) => {
   const defaultSelectedKey = exchangeVersions[0].key;
   return (
-    <Stack horizontal padding={2} styles={{ root: { width: "840px", border: "1px solid gold" } }} verticalAlign="stretch" >
-      <Stack.Item styles={{ root: { width: "600px" } }}>
+    <Stack horizontal padding={2} styles={{ root: { border: "1px solid gold" } }} verticalAlign="stretch" >
+      <Stack.Item styles={{ root: { width: "60vw", flexShrink: 0 } }}>
         <Stack padding={2} verticalFill={true} style={{ textAlign: "left" }} >
           <Stack.Item styles={borderStyle}>
             <Text >Use Autodiscover or use Exchange Web Service URL directly:</Text>
-            <ChoiceGroup styles={{ root: { width: "100%" } }}
+            <ChoiceGroup
+              styles={{ root: { width: "100%" } }}
               defaultSelectedKey="A"
               options={[
                 {
                   key: 'A',
-                  text: 'Autodiscover Email:',
+                  text: '',
                   onRenderField: (props, render) => {
                     const disabled = false && !(props && props.checked);
                     return (
                       <>
                         <div className={optionRootClass}>
                           {render!(props)}
-                          <TextField styles={{ root: { flex: "1 1 auto", marginLeft: "10px" } }} disabled={disabled} />
+                          <TextField label="Autodiscover Email:" underlined styles={{ root: { flex: "1 1 auto", marginLeft: "10px" } }} disabled={disabled} />
                           <DefaultButton text="Default" disabled={disabled} />
                         </div>
-                        <Text variant="small" style={{ marginLeft: "150px" }} >Target mailbox.  Example: myuser@contoso.com</Text>
+                        <Text variant="small" style={{ marginLeft: "32px" }} >Target mailbox.  Example: myuser@contoso.com</Text>
                       </>
                     );
                   },
@@ -63,7 +68,7 @@ export default ({ exchangeVersions }) => {
                 },
                 {
                   key: 'B',
-                  text: 'Service URL:',
+                  text: '',
                   styles: choiceGroupStyles,
                   onRenderField: (props, render) => {
                     const disabled = false && !(props && props.checked);
@@ -71,10 +76,10 @@ export default ({ exchangeVersions }) => {
                       <>
                         <div className={optionRootClass}>
                           {render!(props)}
-                          <TextField styles={{ root: { flex: "1 1 auto", marginLeft: "10px" } }} disabled={disabled} />
+                          <TextField label="Service URL:" underlined styles={{ root: { flex: "1 1 auto", marginLeft: "10px" } }} disabled={disabled} />
                           <DefaultButton text="365 Default" disabled={disabled} />
                         </div>
-                        <Text variant="small" style={{ marginLeft: "150px" }} >Example: https://mail.contoso.com/EWS/Exchange.asmx</Text>
+                        <Text variant="small" style={{ marginLeft: "32px" }} >Example: https://mail.contoso.com/EWS/Exchange.asmx</Text>
                       </>
                     );
                   }
@@ -82,14 +87,15 @@ export default ({ exchangeVersions }) => {
               ]}
             // onChange={_onChange}
             />
+            <br />
             <Text variant="small">Note: For Autodiscover against out of network servers such as Exchange Online, you should set disable SCP Autodiscover so that only POX will be used.  You can do this from the Global Options window.</Text>
           </Stack.Item>
           <Stack.Item styles={borderStyle}>
             <div style={{ display: "flex" }}>
               <Text>EWS Schema Version:</Text>
-              <ComboBox styles={{ root: { flex: "1 1 auto" } }} options={exchangeVersions} defaultSelectedKey={defaultSelectedKey} />
+              <Dropdown styles={{ root: { flex: "1 1 auto" } }} options={exchangeVersions} defaultSelectedKey={defaultSelectedKey} />
             </div>
-            <Text block variant="small">Note: For Autodiscover against out of network servers such as Exchange Online, you should set disable SCP Autodiscover so that only POX will be used.  You can do this from the Global Options window.</Text>
+            <Text block variant="small">Set the version of the EWS Schema to use.  This is not the same thing as the Exchange version.</Text>
           </Stack.Item>
           <Stack.Item styles={borderStyle} grow>
             <ChoiceGroup styles={{ root: { width: "100%" } }}
@@ -109,17 +115,13 @@ export default ({ exchangeVersions }) => {
                       <>
                         {render!(props)}
                         <div className={credentialOptionRootClass}>
-                          <Text>User Name: </Text><TextField styles={{ root: { flex: "1 1 auto", marginLeft: "10px" } }} disabled={disabled} />
+                          <TextField label="User name:" underlined styles={{ root: { flex: "1 1 auto", marginLeft: "4px" } }} disabled={disabled} />
                           <DefaultButton text="Default" disabled={disabled} />
-                        </div>
-                        <div className={credentialOptionRootClass}>
-                          <Text>Password: </Text><TextField styles={{ root: { flex: "1 1 auto", marginLeft: "10px" } }} disabled={disabled} />
-                        </div>
-                        <div className={credentialOptionRootClass}>
-                          <Text>Domain: </Text><TextField styles={{ root: { flex: "1 1 auto", marginLeft: "10px" } }} disabled={disabled} />
+                          <TextField label="Password:" underlined styles={{ root: { flexBasis: "100%", marginLeft: "4px" } }} disabled={disabled} />
+                          <TextField label="Domain:" underlined styles={{ root: { flexBasis: "100%", marginLeft: "4px" } }} disabled={disabled} />
                         </div>
                         <Text variant="small">Use credentials of mailbox being accessed or the those of the EWS Impersonation account.</Text>
-                        <br/>
+                        <br />
                         <Text variant="small">Suggestion: Use UPN/SMTP address and no domain for Outlook 365.</Text>
                       </>
                     );
@@ -136,16 +138,10 @@ export default ({ exchangeVersions }) => {
                       <>
                         {render!(props)}
                         <div className={credentialOptionRootClass}>
-                          <Text>Redirect URI: </Text><TextField styles={{ root: { flex: "1 1 auto", marginLeft: "10px" } }} disabled={disabled} />
-                        </div>
-                        <div className={credentialOptionRootClass}>
-                          <Text>Client App ID: </Text><TextField styles={{ root: { flex: "1 1 auto", marginLeft: "10px" } }} disabled={disabled} />
-                        </div>
-                        <div className={credentialOptionRootClass}>
-                          <Text>Server name: </Text><TextField styles={{ root: { flex: "1 1 auto", marginLeft: "10px" } }} disabled={disabled} />
-                        </div>
-                        <div className={credentialOptionRootClass}>
-                          <Text>Auth Authority: </Text><TextField styles={{ root: { flex: "1 1 auto", marginLeft: "10px" } }} disabled={disabled} />
+                          <TextField label="Redirect URI:" underlined styles={{ root: { flexBasis: "100%", marginLeft: "4px" } }} disabled={disabled} />
+                          <TextField label="Client App ID:" underlined styles={{ root: { flexBasis: "100%", marginLeft: "4px" } }} disabled={disabled} />
+                          <TextField label="Server Name:" underlined styles={{ root: { flexBasis: "100%", marginLeft: "4px" } }} disabled={disabled} />
+                          <TextField label="Auth Authority:" underlined styles={{ root: { flexBasis: "100%", marginLeft: "4px" } }} disabled={disabled} />
                         </div>
                       </>
                     );
@@ -157,11 +153,45 @@ export default ({ exchangeVersions }) => {
           </Stack.Item>
         </Stack>
       </Stack.Item>
-      <Stack.Item styles={{ root: { width: "40vw" } }}>
-        <Stack>
-          <Stack.Item styles={borderStyle}>impersonation</Stack.Item>
-          <Stack.Item styles={borderStyle}>anchor mailbox</Stack.Item>
-          <Stack.Item styles={borderStyle} grow>public folder</Stack.Item>
+      <Stack.Item align="auto">
+        <Stack grow verticalFill={true}>
+          <Stack.Item styles={borderStyle}>
+            <Checkbox label="Check if using EWS Impersonation.  " /*onChange={this._onCheckboxChange}*/ />
+            <div style={{ display: "flex", marginLeft: "32px" }}>
+              <Text>Id Type:</Text>
+              <Dropdown styles={{ root: { flex: "1 1 auto" } }} options={exchangeVersions} defaultSelectedKey={defaultSelectedKey} />
+            </div>
+            <TextField label="Id:" underlined styles={{ root: { flexBasis: "100%", marginLeft: "20px" } }} />
+            <br/>
+            <Text variant="small">Set to mailbox being accessed using EWS Impersonation.</Text>
+          </Stack.Item>
+          <Stack.Item styles={borderStyle}>
+            <Checkbox label="Set X-AnchorMailox header." /*onChange={this._onCheckboxChange}*/ />
+            <TextField label="SMTP:" underlined styles={{ root: { flexBasis: "100%", marginLeft: "20px" } }} />
+            <br/>
+            <Text variant="small">Normaly set to the target mailbox when using Impersonation and when accessing a public folder.</Text>
+          </Stack.Item>
+          <Stack.Item styles={borderStyle}>
+            <Checkbox label="Set X-PublicFolderMailbox header." /*onChange={this._onCheckboxChange}*/ />
+            <TextField label="SMTP:" underlined styles={{ root: { flexBasis: "100%", marginLeft: "20px" } }} />
+            <br/>
+            <Text variant="small">Set when accessing a public folder.</Text>
+          </Stack.Item>
+          <Stack.Item grow>
+            <br/>
+            <DefaultButton style={{width: "200px"}} text="Global Options" />
+            <br/>
+            <Text variant="small">Note: For delegate access: Log in as the delegate then the tree menu select "Add Root Folder...".  Use one of the options to add the folder of the mailbox to the folder tree.</Text>
+            <br/>
+            <Text variant="small">Note: It's best to set the X-AnchorMailbox header for Impersonation.</Text>
+            <br style={{flex: "1 1 100%"}}/>
+          </Stack.Item>
+          <Stack.Item>
+            <div style={{textAlign:"right", alignSelf: "flex-end"}}>
+              <DefaultButton style={{width: "100px", margin: "4px"}} text="Ok" />
+              <DefaultButton style={{width: "100px", margin: "4px"}} text="Cancel" />
+            </div>
+          </Stack.Item>
         </Stack>
       </Stack.Item>
     </Stack>
