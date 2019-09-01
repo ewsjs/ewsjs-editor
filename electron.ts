@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
+const { is } = require("electron-util");
 const url = require('url');
 const path = require('path')
 
@@ -15,7 +16,7 @@ function createWindow() {
   const startUrl =
     process.env.ELECTRON_START_URL ||
     url.format({
-      pathname: path.join(__dirname, '/build/index.html'),
+      pathname: path.join(`${__dirname}/../build/index.html`),
       protocol: "file:",
       slashes: true
     });
