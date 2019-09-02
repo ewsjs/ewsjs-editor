@@ -5,6 +5,9 @@ import {
   Checkbox,
 } from 'office-ui-fabric-react';
 
+import { ExchangeService, ExchangeVersion, Uri, WebCredentials, WellKnownFolderName, FolderView, ConfigurationApi } from "ews-javascript-api";
+import { XhrApi } from "@ewsjs/xhr";
+
 const borderStyle: IStackItemStyles = {
   root: {
     border: "1px solid gray",
@@ -36,7 +39,18 @@ const dropdownStyles: Partial<IDropdownStyles> = {
   }
 };
 
+async function connectEws() {
+  ConfigurationApi.ConfigureXHR(new XhrApi());
+  const svc = new ExchangeService(ExchangeVersion.Exchange2013_SP1);
+  svc.Url = new Uri("https://outlook.office365.com/ews/exchange.asmx");
+  svc.Credentials = new WebCredentials(process.env.USER, process.env.PASSWORD);
+  // svc.XHRApi = new XhrApi();
+  const folders = await svc.FindFolders(WellKnownFolderName.MsgFolderRoot, new FolderView(10));
+  console.log(folders.Folders.map(f => f.DisplayName));
+}
+
 export default ({ exchangeVersions }) => {
+  connectEws();
   const defaultSelectedKey = exchangeVersions[0].key;
   return (
     <Stack horizontal padding={2} styles={{ root: { border: "1px solid gold" } }} verticalAlign="stretch" >
