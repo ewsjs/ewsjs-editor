@@ -19,7 +19,6 @@ function createWindow() {
       nodeIntegration: true,
     }
   });
-
   // and load the index.html of the app.
   const startUrl =
     process.env.ELECTRON_START_URL ||

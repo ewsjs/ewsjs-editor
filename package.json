@@ -6,7 +6,8 @@
     "@ewsjs/xhr": "^1.4.0",
     "electron-util": "^0.12.1",
     "ews-javascript-api": "^0.9.6",
-    "react-spaces": "^0.1.14"
+    "react-data-grid": "^6.1.0",
+    "react-split-pane": "^0.1.87"
   },
   "main": "./build/electron.js",
   "scripts": {
@@ -43,9 +44,10 @@
     "@typescript-eslint/eslint-plugin": "^2.1.0",
     "@typescript-eslint/parser": "^2.1.0",
     "cross-env": "^5.2.1",
+    "dotenv": "^8.1.0",
     "electron": "^6.0.1",
     "electron-builder": "^21.2.0",
-    "eslint": "^6.3.0",
+    "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.14.3",
     "office-ui-fabric-react": "^7.28.3",
     "react": "^16.9.0",

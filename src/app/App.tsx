@@ -15,8 +15,8 @@ const exchangeVersions: IDropdownOption[] = [
 const App: React.FC = () => {
   return (
     <div className="App">
-      {/* <Home /> */}
-      <ServiceDialog exchangeVersions={exchangeVersions} />
+      <Home />
+      {/* <ServiceDialog exchangeVersions={exchangeVersions} /> */}
     </div>
   );
 }

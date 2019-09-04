@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "isolatedModules": false,
+    "target": "es2016",
     "lib": [
       "dom",
       "dom.iterable",

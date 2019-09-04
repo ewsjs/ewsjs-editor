@@ -14,17 +14,18 @@
     "strict": false,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
-    "noImplicitAny":false,
+    "noImplicitAny": false,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve"
   },
   "include": [
-    "src",
+    "src"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "src/ews/common/EwsHelpers/*"
   ]
 }
