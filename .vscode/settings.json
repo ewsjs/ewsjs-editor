@@ -2,5 +2,7 @@
     "editor.tabSize": 2,
     "editor.detectIndentation": false,
     "files.autoSave": "afterDelay",
-    "files.autoSaveDelay": 3000
+    "files.autoSaveDelay": 3000,
+    "eslint.alwaysShowStatus": true,
+    "eslint.packageManager": "yarn"
 }

@@ -5,7 +5,8 @@
   "dependencies": {
     "@ewsjs/xhr": "^1.4.0",
     "electron-util": "^0.12.1",
-    "ews-javascript-api": "^0.9.6"
+    "ews-javascript-api": "^0.9.6",
+    "react-spaces": "^0.1.14"
   },
   "main": "./build/electron.js",
   "scripts": {
@@ -13,6 +14,7 @@
     "build": "cross-env PUBLIC_URL=./ rescripts build && tsc -p tsconfig.build.json",
     "test": "rescripts test",
     "electron": "electron .",
+    "electron:dev": "electron ./electron.dev.js",
     "electron-start": "node src/electron-wait-react",
     "react-start": "rescripts start"
   },
@@ -38,13 +40,18 @@
     "@types/node": "12.7.1",
     "@types/react": "16.9.1",
     "@types/react-dom": "16.8.5",
+    "@typescript-eslint/eslint-plugin": "^2.1.0",
+    "@typescript-eslint/parser": "^2.1.0",
     "cross-env": "^5.2.1",
     "electron": "^6.0.1",
     "electron-builder": "^21.2.0",
+    "eslint": "^6.3.0",
+    "eslint-plugin-react": "^7.14.3",
     "office-ui-fabric-react": "^7.28.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-scripts": "3.0.1",
+    "ts-node": "^8.3.0",
     "typescript": "3.5.3"
   },
   "build": {

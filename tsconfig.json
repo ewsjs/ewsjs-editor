@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2016",
     "lib": [
       "dom",
       "dom.iterable",
@@ -17,12 +17,12 @@
     "noImplicitAny":false,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "noEmit": true,
     "jsx": "preserve"
   },
   "include": [
-    "src"
+    "src",
   ],
   "exclude": [
     "node_modules"

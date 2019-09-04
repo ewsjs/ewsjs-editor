@@ -1,12 +1,14 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
-const { is } = require("electron-util");
-const url = require('url');
-const path = require('path')
+import { app, BrowserWindow, Menu } from 'electron';
+import { is } from "electron-util";
+import * as url from 'url';
+import * as path from 'path';
+
+import { menu } from "./main/menu";
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow
+let mainWindow: BrowserWindow;
 
 function createWindow() {
   // Create the browser window.
@@ -22,7 +24,7 @@ function createWindow() {
   const startUrl =
     process.env.ELECTRON_START_URL ||
     url.format({
-      pathname: path.join(`${__dirname}/../build/index.html`),
+      pathname: path.join(`${__dirname}/${is.development ? '' : '../'}build/index.html`),
       protocol: "file:",
       slashes: true
     });
@@ -37,7 +39,11 @@ function createWindow() {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null
-  })
+  });
+  if (is.development) {
+    mainWindow.webContents.openDevTools();
+  }
+  Menu.setApplicationMenu(menu);
 }
 
 // This method will be called when Electron has finished
