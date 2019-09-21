@@ -4,7 +4,7 @@ import { openModalWindow } from "../../window-manager";
 
 export const mnuNewBindingClick = (menuItem: MenuItem, browserWindow: BrowserWindow, event: KeyboardEvent) => {
   console.log(menuItem.id);
-  openModalWindow("new-service");
+  openModalWindow("FolderTree", browserWindow);
   // browserWindow.webContents.send('open-dialog', "new-service");
 };
 

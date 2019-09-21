@@ -9,4 +9,4 @@ const render = (Component) => {
   )
 }
 
-render(() => <div>Start</div>)
+render(() => <div>Home Page</div>)
