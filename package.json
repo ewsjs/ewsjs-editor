@@ -1,0 +1,111 @@
+{
+  "name": "ewsjs-editor",
+  "version": "0.0.0",
+  "description": "Electron based version of EwsEditor",
+  "main": "build/main/main.js",
+  "scripts": {
+    "start": "run-s main:build watch",
+    "release": "run-s parcel:build \"electron:build {@}\" --",
+    "watch": "run-p -r parcel:watch electron:start",
+    "electron:start": "nodemon --watchmain/.parcel --exec \"electron .\"",
+    "electron:build": "electron-builder build --x64 --publish=never",
+    "parcel:watch": "run-p -r main:watch renderer:watch",
+    "main:watch": "parcel watchmain/main.ts --out-dir build/main/.parcel --out-file main --target electron",
+    "renderer:watch": "parcelrenderer/index.html --port 1124 --out-dir renderer/.parcel",
+    "parcel:build": "run-s main:build renderer:build",
+    "main:build": "parcel build main/main.ts --out-dir build/main --out-file main --target electron",
+    "renderer:build": "parcel build renderer/index.html --public-url ./ --out-dir build/renderer",
+    "test": "run-s parcel:build \"test:jest {@}\" --",
+    "test:jest": "jest",
+    "lint": "tslint**/*.ts{,x}",
+    "electron:prod": "cross-env ELECTRON_IS_DEV=0 electron ."
+  },
+  "private": true,
+  "author": "Gautam Singh (gautamsi)",
+  "license": "MIT",
+  "build": {
+    "productName": "EwsJsEditor",
+    "appId": "ewsjs.editor",
+    "files": [
+      "build/**",
+      "package.json",
+      "!**/*.map"
+    ],
+    "mac": {
+      "target": [
+        "zip"
+      ],
+      "artifactName": "${productName}-mac.${ext}"
+    },
+    "win": {
+      "target": [
+        "zip"
+      ],
+      "artifactName": "${productName}-win.${ext}"
+    },
+    "linux": {
+      "target": [
+        "zip"
+      ],
+      "category": "Development",
+      "artifactName": "${productName}-linux.${ext}"
+    },
+    "directories": {
+      "output": "release"
+    }
+  },
+  "jest": {
+    "verbose": true,
+    "collectCoverageFrom": [
+      "renderer/**",
+      "!renderer/index.tsx",
+      "!renderer/tests/**",
+      "!renderer/.parcel/**"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "babel-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.6.0",
+    "@types/jest": "^24.0.18",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^24.9.0",
+    "cross-env": "^6.0.0",
+    "electron": "^6.0.10",
+    "electron-builder": "^21.2.0",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.2",
+    "npm-run-all": "^4.1.5",
+    "parcel-bundler": "^1.12.3",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1",
+    "react-test-renderer": "^16.9.0",
+    "spectron": "^8.0.0",
+    "tslint": "^5.20.0",
+    "tslint-react": "^4.1.0",
+    "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "app-root-path": "^2.2.1",
+    "electron-is-dev": "^1.1.0"
+  },
+  "browserslist": [
+    "last 1 Chrome version"
+  ]
+}
