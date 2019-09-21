@@ -1,7 +1,6 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
-import Router from './router'
 
 const render = (Component) => {
   ReactDOM.render(
@@ -10,4 +9,4 @@ const render = (Component) => {
   )
 }
 
-render(Router)
+render(() => <div>Start</div>)
