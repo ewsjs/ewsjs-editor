@@ -1,7 +1,7 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
-import "../../shared"
-import ServiceDialog from "../../components/forms/dialogs/ServiceDialog"
+import "../../../shared"
+import ServiceDialog from "../../../components/forms/dialogs/ServiceDialog"
 
 const render = (Component) => {
   ReactDOM.render(
@@ -10,4 +10,5 @@ const render = (Component) => {
   )
 }
 
-render(ServiceDialog)
+// render(ServiceDialog)
+render(() => <div>test</div>)

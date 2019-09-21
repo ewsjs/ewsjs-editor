@@ -7,7 +7,7 @@ import { menu } from "./menu/menu"
 
 app.on("ready", async () => {
 // create main window
-  const mainWindow = createWindow("index", menu)
+  const mainWindow = createWindow("Index", menu)
 })
 
 app.on("window-all-closed", app.quit)
