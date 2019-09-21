@@ -1,17 +1,17 @@
-import { app, Menu } from "electron";
+import { app, Menu } from "electron"
 import {
   mnuNewBindingClick,
   mnuOpenDefaultBindingClick,
   mnuCloseBindingClick,
   mnuOpenProfileClick,
   mnuSaveProfileClick,
-} from "./handlers/fileMenuHandlers";
+} from "./handlers/fileMenuHandlers"
 
 import {
   mnuViewConfigPropertySetClick,
   mnuViewResetPropertySetClick,
   mnuRefreshClick,
-} from "./handlers/viewMenuHandlers";
+} from "./handlers/viewMenuHandlers"
 import {
   DebugLogVeiwerMenuItemClick,
   OptionsMenuItemClick,
@@ -41,7 +41,7 @@ import {
   mnuMailTipsClick,
   mnuSearchForSearchFoldersClick,
   developerToolsTestWindowToolStripMenuItemClick,
-} from "./handlers/toolsMenuHandlers";
+} from "./handlers/toolsMenuHandlers"
 import {
   mnuOpenItemByIdClick,
   mnuOpenFolderByIdClick,
@@ -54,8 +54,8 @@ import {
   viewHTMLInBrowserToolStripMenuItemClick,
   mnuMimeParserClick,
   mnuCredentialCacheClick,
-} from "./handlers/otherMenuHandlers";
-import { mnuAboutClick } from "./handlers/helpMenuHandlers";
+} from "./handlers/otherMenuHandlers"
+import { mnuAboutClick } from "./handlers/helpMenuHandlers"
 
 export const menu = Menu.buildFromTemplate([
   {
@@ -396,4 +396,3 @@ export const menu = Menu.buildFromTemplate([
     ]
   },
 ])
-

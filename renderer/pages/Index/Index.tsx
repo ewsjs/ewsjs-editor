@@ -1,11 +1,10 @@
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-
+import * as React from "react"
+import * as ReactDOM from "react-dom"
 
 const render = (Component) => {
   ReactDOM.render(
     <Component />,
-    document.getElementById('root')
+    document.getElementById("root")
   )
 }
 

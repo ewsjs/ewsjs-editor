@@ -4,6 +4,8 @@
     "jsx": "preserve",
     "sourceMap": true,
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "plugins": [
+      { "name": "typescript-tslint-plugin" }
+    ]
   }
 }
