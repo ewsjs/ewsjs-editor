@@ -1,4 +1,5 @@
-import { BrowserWindow, Menu } from "electron"
+import { BrowserWindow, Menu, app } from "electron"
+const { join } = require("path")
 const { format } = require("url")
 const { resolve } = require("app-root-path")
 
@@ -21,6 +22,7 @@ export const openWindow = (name, parentWindow = null, modal = false) => {
     modal,
     webPreferences: {
       nodeIntegration: true,
+      preload: join(app.getAppPath(), "build/main/static/preload.js")
     }
   })
   bw.loadURL(getWindowUrl(name))
@@ -33,7 +35,10 @@ export const createWindow = (page, menu = null) => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    show: false
+    show: false,
+    webPreferences: {
+      preload: join(app.getAppPath(), "build/main/static/preload.js")
+    }
   })
 
   mainWindow.once("ready-to-show", () => {

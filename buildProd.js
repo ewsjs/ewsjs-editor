@@ -16,7 +16,7 @@ const options = {
   // outFile: 'index.html', // The name of the outputFile
   publicUrl: './/', // The url to serve on, defaults to '/'
   watch: false, // Whether to watch the files and rebuild them on change, defaults to process.env.NODE_ENV !== 'production'
-  cache: true, // Enabled or disables caching, defaults to true
+  cache: false, // Enabled or disables caching, defaults to true
   cacheDir: '.cache', // The directory cache gets put in, defaults to .cache
   contentHash: true, // Disable content hash from being included on the filename
   scopeHoist: false, // Turn on experimental scope hoisting/tree shaking flag, for smaller production bundles
