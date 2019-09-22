@@ -1,4 +1,5 @@
-import { IpcRenderer, Remote } from "electron";
+import { Remote } from "electron";
+import { RendererProcessIpc } from "electron-better-ipc";
 import * as ews from "ews-javascript-api";
 import * as xhr from "@ewsjs/xhr";
 
@@ -8,7 +9,7 @@ interface ElectronRemote {
 
 declare global {
   interface Window {
-    ipc: IpcRenderer
+    ipc: RendererProcessIpc
     remote: ElectronRemote & Omit<Remote, keyof ElectronRemote>
     ews: typeof ews
     ewsXhr: typeof xhr

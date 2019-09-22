@@ -1,6 +1,7 @@
-const { ipcRenderer: ipc, remote } = require('electron');
+const { remote } = require('electron');
+const { ipcRenderer } = require('electron-better-ipc');
 
-window.ipc = ipc;
+window.ipc = ipcRenderer;
 window.remote = remote;
 // window.ews = require("ews-javascript-api");
 

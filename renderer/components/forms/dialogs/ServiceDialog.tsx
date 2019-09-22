@@ -69,7 +69,9 @@ const closeWindow = () => {
   w.close()
 }
 
-export default ({ onClose }) => {
+const formToObjet = form => Object.fromEntries(Object.entries(form).filter(([a, b]) => typeof b !== "function"))
+
+export default () => {
   const form = useFormState({
     useAutoD: false, autodEmail: "", url: "",
     exchangeVersion: defaultExchangeVersion,
@@ -78,9 +80,15 @@ export default ({ onClose }) => {
     setAnchorMailbox: false, anchorMailboxSmtp: "",
     setPublicFolderHeader: false, publicFolderHeaderSmtp: ""
   }) as any
-  const close = () => {
-    if (onClose) {
-      onClose()
+
+  const validateAndClose = async () => {
+    const result = await window.ipc.callMain("validate-cred", formToObjet(form)) as any
+    if (result === true) {
+      closeWindow()
+    }
+    if (typeof result === "string") {
+      const { dialog } = window.remote
+      dialog.showErrorBox("Validation Error", result)
     }
   }
   return (
@@ -231,7 +239,7 @@ export default ({ onClose }) => {
           </Stack.Item>
           <Stack.Item>
             <div style={{ textAlign: "right", alignSelf: "flex-end" }}>
-              <DefaultButton style={{ width: "100px", margin: "4px" }} text="Ok" onClick={() => console.log(Object.entries(form).filter(([a, b]) => typeof b !== "function"))} />
+              <DefaultButton style={{ width: "100px", margin: "4px" }} text="Ok" onClick={(e) => validateAndClose(e)} />
               <DefaultButton style={{ width: "100px", margin: "4px" }} text="Cancel" onClick={closeWindow} />
             </div>
           </Stack.Item>
