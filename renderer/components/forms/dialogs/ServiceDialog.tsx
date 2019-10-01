@@ -22,16 +22,18 @@ import { DefaultButton } from "office-ui-fabric-react/lib/Button"
 import { ConnectingIdType } from "ews-javascript-api/js/Enumerations/ConnectingIdType"
 import { ExchangeVersion } from "ews-javascript-api/js/Enumerations/ExchangeVersion"
 
-const connectingIdTypes = Object.keys(ConnectingIdType).filter((x) => isNaN(Number(x))).map(y => ({ key: y, text: y }))
+const connectingIdTypes = getEnumMembers(ConnectingIdType)
 const defaultConnectingIdType = ConnectingIdType[ConnectingIdType.SmtpAddress]
 
-const exchangeVersions = Object.keys(ExchangeVersion).filter((x) => isNaN(Number(x))).map(y => ({ key: y, text: y }))
+const exchangeVersions = getEnumMembers(ExchangeVersion)
 const defaultExchangeVersion = ExchangeVersion[ExchangeVersion.Exchange2013]
 
 import { Label } from "office-ui-fabric-react/lib/Label"
 import { ComboBox } from "office-ui-fabric-react/lib/ComboBox"
 
 import useFormState from "../../../hooks/useFormState"
+import { getEnumMembers } from "../../../utils/utils"
+import { ServiceDialogFormType } from "../../../../types/interfaces"
 
 const borderStyle: IStackItemStyles = {
   root: {
@@ -79,7 +81,7 @@ export default () => {
     impersonate: false, impersonateIdType: defaultConnectingIdType, impersonateId: "",
     setAnchorMailbox: false, anchorMailboxSmtp: "",
     setPublicFolderHeader: false, publicFolderHeaderSmtp: ""
-  }) as any
+  }) as ServiceDialogFormType
 
   const validateAndClose = async () => {
     const result = await window.ipc.callMain("validate-cred", formToObjet(form)) as any
@@ -239,7 +241,7 @@ export default () => {
           </Stack.Item>
           <Stack.Item>
             <div style={{ textAlign: "right", alignSelf: "flex-end" }}>
-              <DefaultButton style={{ width: "100px", margin: "4px" }} text="Ok" onClick={(e) => validateAndClose(e)} />
+              <DefaultButton style={{ width: "100px", margin: "4px" }} text="Ok" onClick={(e) => validateAndClose()} />
               <DefaultButton style={{ width: "100px", margin: "4px" }} text="Cancel" onClick={closeWindow} />
             </div>
           </Stack.Item>

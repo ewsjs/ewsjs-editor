@@ -1,3 +1,5 @@
 {
-    "tslint.packageManager": "yarn"
+    "tslint.packageManager": "yarn",
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false
 }
